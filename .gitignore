@@ -28,6 +28,8 @@
 *.out
 *.synctex.gz
 *.pdf
+*.fls
+*.fdb_latexmk
 
 # Mac IDE files
 *.swp
