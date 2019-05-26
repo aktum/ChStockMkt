@@ -1,8 +1,9 @@
 library(zoo)
 library(matlib)
 library(rio)
-setwd("~/StockMarket/ChineseStock")
+setwd("~/Documents/ChStockMkt")
 ds <- import("SSEC.csv")
+x.data <- as.Date(ds$Date)
 ds <- log(ds$SSEC.Close)
 ds <- as.zoo(ds)
 y_mean <- function(i, data) {
@@ -56,3 +57,6 @@ sz_s_sq_alphamu_hat <- s_sq_alphamu(sz_s_sq_emu_hat, ds2)
 sz_tau_alphamu_hat <- tau_alphamu(sz_s_sq_alphamu_hat,sz_alpha)
 sz_sigma_sq_zero_hat <- sigma_sq_zero(ds2)
 sz_phi1 <- phi_1(sz_s_sq_emu_hat, sz_sigma_sq_zero_hat)
+#Графики для работы
+plot.zoo(y = ds, xlab = x.data)
+axis(x.data)

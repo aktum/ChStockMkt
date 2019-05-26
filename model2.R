@@ -1,7 +1,7 @@
 library(zoo)
 library(matlib)
 library(rio)
-setwd("~/StockMarket/ChineseStock")
+setwd("~/Documents/ChStockMkt")
 ds <- import("SSEC.csv")
 ds <- log(ds$SSEC.Close)
 ds <- as.zoo(ds)
@@ -27,12 +27,26 @@ theta <- theta_tau(X,Y)
 s_sq_etau <- function(Xmatrix, Ymatrix, data) {
   (length(data)-4)^(-1) %*% t(Ymatrix) %*%
     (
-      diag(nrow = nrow(Xmatrix))-Xmatrix %*%
+      diag(nrow = nrow(X))-Xmatrix %*%
        ((t(Xmatrix) %*% Xmatrix)^(-1)) %*% t(Xmatrix)
       ) %*%
     Ymatrix
 }
 s_sq_etau_hat <- s_sq_etau(X,Y,ds)
+
+tau_alphatau <- function(Xmatrix, s_sq_etau_hat, theta) {
+  C <- inv(t(Xmatrix) %*% Xmatrix)
+  (C[1,1] * s_sq_etau_hat^2)^(-0.5) * theta[1,1]
+}
+
+tau_alphatau_hat <- tau_alphatau(X, s_sq_etau_hat, theta)
+
+tau_betatau <- function(Xmatrix, s_sq_etau_hat, theta) {
+  C <- inv(t(Xmatrix) %*% Xmatrix)
+  (C[2,2] * s_sq_etau_hat^2)^(-0.5) * theta[2,1]
+}
+
+tau_betatau_hat <- tau_betatau(X, s_sq_etau_hat, theta)
 
 sigma_sq_zero <- function(data) {
   (length(data)-1)^(-1)*
