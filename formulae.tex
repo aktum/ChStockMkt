@@ -1,0 +1,102 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{cmap}					% enable search in PDF
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+
+\usepackage{geometry} % Setting margins
+
+\usepackage{booktabs}
+
+\geometry{top=20mm}
+
+\geometry{bottom=20mm}
+
+\geometry{left=20mm}
+
+\geometry{right=20mm}
+
+\setlength{\parindent}{1.27 cm}
+
+\usepackage{setspace} % Интерлиньяж
+\singlespacing % Интерлиньяж 1
+
+\newtheorem{definition}{Определение}
+
+\title{Являются ли рынки акций КНР эффективными?}
+
+\author{Туманянц Артемий}
+
+\date{2019\\ВШЭ\\Москва}
+
+\begin{document}
+	Статистический тест был впервые описан в \cite{Dickey1981}. Сначала оценим модель 1(уравнение \ref{eq:model1}).
+	\begin{equation}
+		Y_t=\alpha+\rho Y_{t-1}+e_t\quad (t=2,3,\ldots,n),
+		\label{eq:model1}
+	\end{equation}
+где $Y_t$ фиксированы и $e_t \sim \mathcal{N}(0,\,\sigma^{2})$. Параметры модели оцениваются с помощью уравнений \ref{eq:mod1estrho}.
+
+	\begin{equation}
+		\hat{\rho_\mu}=\left[\sum_{t=2}^n (Y_{t-1}-\bar{y}_{(-1)})^2\right]^{-1}
+		\sum_{t=2}^n \left(Y_{t-1}-\bar{y}_{(-1)}\right),
+		\label{eq:mod1estrho}
+	\end{equation}
+	\begin{equation}
+		\hat{\alpha_\mu}=\bar{y}_{(0)}-\hat{\rho_\mu}\bar{y}_{(-1)},
+	\end{equation}
+	where
+	\begin{equation}
+		\bar{y}_(i)=(n-1)^{-1}\sum_{t=2}^{n}Y_{t+i}
+	\end{equation}
+	t-statistic
+	\begin{equation}
+		\hat{\tau}_{\alpha\mu}=S^{-1}_{\alpha\mu}\hat{\alpha}_\mu,
+		\label{eq:mod1tau}
+	\end{equation}
+	where
+	\begin{equation}
+	S^2_{\alpha\mu}=S^2_{e\mu}
+	\left[ (n-1)^{-1}+\bar{y}^2_{(-1)}
+	\left\{
+	\sum_{t=2}^{n}(Y_{t-1}-\bar{y}_{(-1)})^2\right\}^{-1}\right],
+	\end{equation}
+	\begin{equation}
+	S^2_{e\mu}=(n-3)^{-1}\sum_{t=2}^{n}(Y_t-\hat{\alpha_\mu}-\hat{\rho}_\mu Y_{t-1})^2
+	\end{equation}
+
+	\begin{equation}
+		\label{model2}
+		Y_t=\alpha+\beta(t-1-0.5n)+\rho Y_{t-1}+e_t\quad (t=2,3,\ldots,n)
+	\end{equation}
+
+	\begin{equation}
+		\hat{\theta}_\tau=(\hat{\alpha}_\tau,\hat{\beta}_\tau,\hat{\rho}_\tau)'=(X'X)^{-1}X'Y
+	\end{equation}
+
+	\begin{align}
+		\label{mod2taualpha}
+		\hat{\tau}_{\alpha\tau}&=(C_{11}S^2_{e\tau})^{-0.5}\hat{\alpha}_\tau,\\
+		\label{mod2taubeta}
+		\hat{\tau}_{\beta\tau}&=(C_{22}S^2_{e\tau})^{-0.5}\hat{\beta}_\tau,\quad where\\
+		S^2_{e\tau}&=(n-4)^{-1}Y'\left[I-X(X'X)^{-1}X'\right]Y
+	\end{align}
+
+	\begin{align*}
+	\label{eq:likefun}
+	log{(L)}=-0.5(n-1)log(2\pi)-(n-1)log{(\sigma)}-\\-(2\sigma^2)^{-1}\sum_{t=2}^{n}
+	\left[Y_t-\alpha-\beta(t-1-0.5n)-\rho Y_{t-1}\right]^2
+	\end{align*}
+
+	\begin{equation}
+		\label{eq:phi2}
+		\Phi_2=(3S^2_{e\tau})\left[(n-1)\hat{\sigma}_0^2-(n-4)S^2_{e\tau}\right]
+	\end{equation}
+
+	\begin{equation}
+	\Phi_1=(2S^2_{e\mu})\left[(n-1)\hat{\sigma}_0^2-(n-3)S^2_{e\mu}\right]
+	\end{equation}
+\end{document}
