@@ -1,0 +1,7 @@
+install.packages("aTSA")
+library(aTSA)
+ds2 <- import("SZSE.csv")
+ds2 <- log(ds2$Open)
+adf.test(ds2)
+pp.test(ds2)
+kpss.test(ds2)
