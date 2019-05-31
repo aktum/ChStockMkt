@@ -1,0 +1,27 @@
+---
+title: "unitroot"
+author: "Туманянц Артемий"
+date: "5/28/2019"
+output: 
+  pdf_document: 
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(aTSA)
+library(rio)
+ds <- import("SSEC.csv")
+ds <- log(ds$SSEC.Close)
+ds2 <- import("SZSE.csv")
+ds2 <- log(ds2$Open)
+```
+
+```{r tests}
+adf.test(ds)
+adf.test(ds2)
+pp.test(ds)
+pp.test(ds2)
+kpss.test(ds)
+kpss.test(ds2)
+```

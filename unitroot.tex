@@ -1,0 +1,326 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={unitroot},
+            pdfauthor={Туманянц Артемий},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{unitroot}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Туманянц Артемий}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{5/28/2019}
+
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{adf.test}\NormalTok{(ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## Augmented Dickey-Fuller Test
+## alternative: stationary
+##
+## Type 1: no drift no trend
+##       lag      ADF p.value
+##  [1,]   0 -0.01785   0.639
+##  [2,]   1 -0.00484   0.643
+##  [3,]   2  0.00119   0.644
+##  [4,]   3 -0.00979   0.641
+##  [5,]   4 -0.01997   0.638
+##  [6,]   5 -0.02217   0.638
+##  [7,]   6 -0.01323   0.640
+##  [8,]   7 -0.01098   0.641
+##  [9,]   8 -0.01031   0.641
+## Type 2: with drift no trend
+##       lag   ADF p.value
+##  [1,]   0 -1.93   0.355
+##  [2,]   1 -1.97   0.342
+##  [3,]   2 -1.92   0.361
+##  [4,]   3 -1.97   0.342
+##  [5,]   4 -2.09   0.291
+##  [6,]   5 -2.08   0.298
+##  [7,]   6 -1.96   0.345
+##  [8,]   7 -2.02   0.322
+##  [9,]   8 -2.01   0.322
+## Type 3: with drift and trend
+##       lag   ADF p.value
+##  [1,]   0 -1.92   0.611
+##  [2,]   1 -1.95   0.597
+##  [3,]   2 -1.90   0.618
+##  [4,]   3 -1.95   0.597
+##  [5,]   4 -2.08   0.542
+##  [6,]   5 -2.06   0.549
+##  [7,]   6 -1.94   0.600
+##  [8,]   7 -2.00   0.575
+##  [9,]   8 -2.00   0.576
+## ----
+## Note: in fact, p.value = 0.01 means p.value <= 0.01
+\end{Verbatim}\end{multicols}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{adf.test}\NormalTok{(ds2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## Augmented Dickey-Fuller Test
+## alternative: stationary
+##
+## Type 1: no drift no trend
+##      lag     ADF p.value
+## [1,]   0 -0.0718   0.623
+## [2,]   1 -0.1129   0.611
+## [3,]   2 -0.1556   0.599
+## [4,]   3 -0.1839   0.591
+## [5,]   4 -0.1937   0.588
+## [6,]   5 -0.2380   0.575
+## [7,]   6 -0.2356   0.576
+## [8,]   7 -0.2375   0.576
+## Type 2: with drift no trend
+##      lag   ADF p.value
+## [1,]   0 -2.04   0.313
+## [2,]   1 -1.99   0.330
+## [3,]   2 -1.93   0.356
+## [4,]   3 -2.01   0.326
+## [5,]   4 -2.04   0.310
+## [6,]   5 -2.06   0.306
+## [7,]   6 -2.01   0.323
+## [8,]   7 -2.20   0.246
+## Type 3: with drift and trend
+##      lag   ADF p.value
+## [1,]   0 -2.20   0.494
+## [2,]   1 -2.13   0.519
+## [3,]   2 -2.05   0.554
+## [4,]   3 -2.11   0.528
+## [5,]   4 -2.15   0.514
+## [6,]   5 -2.14   0.517
+## [7,]   6 -2.10   0.534
+## [8,]   7 -2.28   0.457
+## ----
+## Note: in fact, p.value = 0.01 means p.value <= 0.01
+\end{Verbatim}\end{multicols}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pp.test}\NormalTok{(ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## Phillips-Perron Unit Root Test
+## alternative: stationary
+##
+## Type 1: no drift no trend
+##  lag    Z_rho p.value
+##    9 -0.00246   0.692
+## -----
+##  Type 2: with drift no trend
+##  lag Z_rho p.value
+##    9 -7.96   0.293
+## -----
+##  Type 3: with drift and trend
+##  lag Z_rho p.value
+##    9 -7.93   0.588
+## ---------------
+## Note: p-value = 0.01 means p.value <= 0.01
+\end{Verbatim}\end{multicols}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pp.test}\NormalTok{(ds2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## Phillips-Perron Unit Root Test
+## alternative: stationary
+##
+## Type 1: no drift no trend
+##  lag    Z_rho p.value
+##    8 -0.00591   0.691
+## -----
+##  Type 2: with drift no trend
+##  lag Z_rho p.value
+##    8  -8.9   0.239
+## -----
+##  Type 3: with drift and trend
+##  lag Z_rho p.value
+##    8 -9.85   0.468
+## ---------------
+## Note: p-value = 0.01 means p.value <= 0.01
+\end{Verbatim}\end{multicols}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kpss.test}\NormalTok{(ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## KPSS Unit Root Test
+## alternative: nonstationary
+##
+## Type 1: no drift no trend
+##  lag   stat p.value
+##   12 0.0723     0.1
+## -----
+##  Type 2: with drift no trend
+##  lag   stat p.value
+##   12 0.0974     0.1
+## -----
+##  Type 1: with drift and trend
+##  lag  stat p.value
+##   12 0.099     0.1
+## -----------
+## Note: p.value = 0.01 means p.value <= 0.01
+##     : p.value = 0.10 means p.value >= 0.10
+\end{Verbatim}
+\end{multicols}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kpss.test}\NormalTok{(ds2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{multicols}{2}\begin{Verbatim}[fontsize=\small]
+## KPSS Unit Root Test
+## alternative: nonstationary
+##
+## Type 1: no drift no trend
+##  lag   stat p.value
+##    9 0.0701     0.1
+## -----
+##  Type 2: with drift no trend
+##  lag stat p.value
+##    9 0.16     0.1
+## -----
+##  Type 1: with drift and trend
+##  lag   stat p.value
+##    9 0.0728     0.1
+## -----------
+## Note: p.value = 0.01 means p.value <= 0.01
+##     : p.value = 0.10 means p.value >= 0.10
+\end{Verbatim}\end{multicols}
+
+
+\end{document}

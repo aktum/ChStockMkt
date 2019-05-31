@@ -1,0 +1,233 @@
+%!TEX TS-program = xelatex
+\documentclass{beamer}
+
+\usepackage{HSE-theme/beamerthemeHSE} % Подгружаем тему
+
+\usepackage[T1,T2A]{fontenc} % make cyrillic symbols work
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{cmap}					% enable search in PDF
+
+\usepackage{ulem}
+
+%%% Работа с русским языком и шрифтами
+\usepackage[english,russian]{babel}   % загружает пакет многоязыковой вёрстки
+\usepackage{fontspec}      % подготавливает загрузку шрифтов Open Type, True Type и др.
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  % свойства шрифтов по умолчанию
+\setmainfont[Ligatures={TeX,Historic}]{Myriad Pro} %  установите шрифты Myriad Pro или (при невозможности) замените здесь на другой шрифт, который есть в системе — например, Arial
+\setsansfont{Myriad Pro}  %  установите шрифты Myriad Pro или (при невозможности) замените здесь на другой шрифт, который есть в системе — например, Arial
+\setmonofont{Courier New}
+\uselanguage{russian}
+\languagepath{russian}
+\deftranslation[to=russian]{Theorem}{Теорема}
+\deftranslation[to=russian]{Definition}{Определение}
+\deftranslation[to=russian]{Definitions}{Определения}
+\deftranslation[to=russian]{Corollary}{Следствие}
+\deftranslation[to=russian]{Fact}{Факт}
+\deftranslation[to=russian]{Example}{Пример}
+\deftranslation[to=russian]{Examples}{Примеры}
+
+\usepackage{multicol} 		% Несколько колонок
+\graphicspath{{images/}}  	% Папка с картинками
+
+%%% Информация об авторе и выступлении
+\title[Являются ли фондовые рынки КНР эффективными?]{Являются ли фондовые рынки КНР эффективными?}
+\subtitle{Актуальные проблемы современных фондовых рынков}
+\author[Туманянц А.К.]{Туманянц А.К. \\ \smallskip \scriptsize \url{aktumanyants@edu.hse.ru}\\\url{https://www.hse.ru/org/persons/190919743}}
+\institute[Высшая школа экономики]{Национальный исследовательский университет \\ «Высшая школа экономики» (Москва)}
+\date{\today}
+
+\begin{document}	% Начало презентации
+
+\frame[plain]{\titlepage}	% Титульный слайд
+
+\section{}
+\subsection{}
+
+\begin{frame}
+\frametitle{Цель и задачи исследования}
+\emph{Цель:} проверить динамику индексов Шэньчжэньской и Шанхайской бирж на соответствие гипотезам о случайном блуждании и о слабой эффективности рынка.
+
+Задачи:
+\begin{enumerate}
+	\item Проанализировать теоретическую основу исследований об эффективности рынка;
+  \item Провести тест на соответствие китайского фондового рынка гипотезе о случайном блужданнии;
+  \item Провести ряд тестов на стационарность временного ряда цен закрытия фондовых бирж Китая;
+  \item Сравнить полученные результаты с работами других исследователей.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Теоретическая основа}
+\framesubtitle{От свободного блуждания к стационарности и дальше}
+Путь развития гипотезы об эффективности рынка:
+\begin{itemize}
+	\item 1950-1970е: Гипотеза о свободном блуждании
+	\item 1970е: Законченная форма гипотезы о трех формах эффективности рынка
+	\item 1980е: Гипотезы о стационарности, о чрезмерной реакции рынка, об оптимизме инвесторов и тд.
+\end{itemize}
+Результаты исследований фондового рынка КНР:
+\begin{itemize}
+	\item Liu et al, 1997: Гипотеза о свободном блуждании не отвергается
+	\item Wang et al, 2015: Гипотеза о слабой эффективности рынка не отвергается
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Методология}
+\framesubtitle{Спецификация моделей}
+\emph{Источник:  D. A. Dickey and W. A. Fuller. Likelihood Ratio Statistics for Autoregressive Time Series with a Unit Root. Econometrica, 49(4):1057–1072, 1981}
+
+\textbf{Модель 1.}
+\begin{equation}
+	Y_t=\alpha+\rho Y_{t-1}+e_t\quad (t=2,3,\ldots,n),
+\end{equation}
+
+\textbf{Модель 2.}
+\begin{equation}
+	Y_t=\alpha+\beta(t-1-0.5n)+\rho Y_{t-1}+e_t\quad (t=2,3,\ldots,n),
+\end{equation}
+где $Y_1$ фиксирован и $e_t \sim \mathcal{N}(0,\,\sigma^{2})$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Методология}
+	\framesubtitle{Отношение правдоподобия и тестовая статистика}
+	\textbf{Функция правдоподобия}
+	\begin{align}
+	\label{eq:likefun}
+	log{(L)}=&-0.5(n-1)log(2\pi)-(n-1)log{(\sigma)}-(2\sigma^2)^{-1}\times\\
+	\times&\sum_{t=2}^{n}\left[Y_t-\alpha-\beta(t-1-0.5n)-\rho Y_{t-1}\right]^2
+	\end{align}
+	Если $H_0:(\alpha,\beta,\rho)=(0,0,1)$ не отвергается, то максимум функции правдоподобия достигается в точке
+	\begin{equation}
+	\hat{\sigma}_0=(n-1)^{(-1)}\sum_{t=2}^n(Y_t-Y_{t-1})^2
+	\end{equation}
+	Если $H_0$ отвергается в пользу $H_A$, то максимум достигается в точке $(\hat{\sigma}_1^2,\hat{\theta}_\tau^{'})$, где
+	\begin{align}
+	\hat{\sigma}_1^2&=(n-4)(n-1)^{(-1)}S^2_{e\tau},\\
+	\hat{\theta}_\tau&=(\hat{\alpha}_\tau,\hat{\beta}_\tau,\hat{\rho}_\tau)'=(X'X)^{-1}X'Y
+	\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{Отношение правдоподобия и тестовые статистики}
+Отношение правдоподобия 
+\begin{align}
+\left[\hat{\sigma}_0^{-1}\hat{\sigma}_1\right]^{n-1}&=\left[1+3(n-4)^{-1}\Phi_2\right],\quad where\\
+\Phi_2&=(3S^2_{e\tau})\left[(n-1)\hat{\sigma}_0^2-(n-4)S^2_{e\tau}\right]
+\end{align}
+
+\begin{table}
+	\centering
+	\caption{Тестовые статистики и соответствующие им гипотезы.}
+	\begin{tabular}{|l|c|}
+		\hline
+		\multicolumn{1}{|c|}{$H_0$} & Тестовая статистика \\ \hline
+		$(\alpha,\rho)=(0,1)$ & $\Phi_1$ \\ \hline
+		$(\alpha,\beta,\rho)=(0,0,1)$ & $\Phi_2$ \\ \hline
+		$(\alpha,\beta,\rho)=(\alpha,0,1)$ & $\Phi_3$ \\ \hline
+	\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Результаты}
+\framesubtitle{Сравнение с исследованием Liu et al, 1997}
+\begin{multicols}{2}
+\begin{center}
+	\textbf{Tumanyants, 2019}
+\end{center}
+\begin{itemize}
+	\item SSE: 1/5/2007-1/2/2019
+	\item SZE: 14/9/2012-7/5/2019
+	\item $n^{SSE}=2943$
+	\item $n^{SZE}=1611$
+	\item $\Phi_1^{SSE}=-0.00012$
+	\item $\Phi_2^{SSE}=-0.05$
+	\item $\Phi_3^{SSE}=0.00021$
+	\item $\Phi_1^{SZE}=-0.061$
+	\item $\Phi_2^{SZE}=-0.04$
+	\item $\Phi_3^{SZE}=0.00155$
+	\item \sout{Random walk}
+\end{itemize}
+\begin{center}
+	\textbf{Liu et al, 1997}
+\end{center}
+\begin{itemize}
+	\item SSE: 21/5/1992-16/12/1995
+	\item SZE: 21/5/1992-16/12/1995
+	\item $n^{SSE}=933$
+	\item $n^{SZE}=933$
+	\item $\Phi_1^{SSE}=3.126$
+	\item $\Phi_2^{SSE}=4.57\,\bigstar$
+	\item $\Phi_3^{SSE}=-3.017$
+	\item $\Phi_1^{SZE}=3.160$
+	\item $\Phi_2^{SZE}=4.374\,\bigstar$
+	\item $\Phi_3^{SZE}=-2.95$
+	\item Random walk!
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Результаты}
+	\framesubtitle{Сравнение с исследованием Wang et al, 2015}
+	\begin{multicols}{2}
+		\begin{center}
+			\textbf{Tumanyants, 2019}
+		\end{center}
+	\begin{itemize}
+		\item SSE: 1/5/2007-1/2/2019
+		\item ADF: -2.09(4) +D -T
+		\item PP: -7.96 (10) +D -T
+		\item KPSS: 0.099 (12) +D -T*
+	\end{itemize}
+	\begin{center}
+		\textbf{Wang et al, 2015}
+	\end{center}
+\begin{itemize}
+		\item SSE: 1/12/1990-1/3/2013
+		\item ADF: -3.420 (0)
+		\item PP: -3.446 (0) **
+		\item KPSS: 0.158 (12) **
+\end{itemize}
+\end{multicols}
+
+\begin{multicols}{2}
+\begin{itemize}
+	\item SZE: 1/5/2007-1/2/2019
+	\item ADF: -2.06(5) +D -T
+	\item PP: -8.9 (8) +D -T
+	\item KPSS: 0.16 (9) +D -T*
+\end{itemize}
+\begin{itemize}
+	\item Итого для SSE и SZE
+	\item ADF: $H_0$ не отв. \textbf{EMH!}
+	\item PP: $H_0$ отв. \textbf{EMH!}
+	\item KPSS: $H_0$ отв. \textbf{EMH!}
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[c]
+\begin{center}
+\frametitle{\LARGE Спасибо за внимание!}
+
+{\LARGE \inserttitle}
+
+\bigskip
+
+{\insertauthor}
+
+\bigskip\bigskip
+
+{\insertinstitute}
+
+\bigskip\bigskip
+
+{\large \insertdate}
+\end{center}
+\end{frame}
+
+\end{document}
